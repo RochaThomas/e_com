@@ -4,7 +4,10 @@ import { ShoppingCart } from '@material-ui/icons';
 
 import logo from '../../assets/commerce.png'
 
+import useStyles from './navbarStyles';
+
 const Navbar = () => {
+    const classes = useStyles();
     return (
         <>
             <AppBar position="fixed" className={classes.appBar} color='inherit'>
