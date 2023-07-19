@@ -21,8 +21,13 @@ const App = () => {
      * getting cart from CommerceJS
      * API CALL
      */
-    const fetchCart = async () => {
-        setCart(await commerce.cart.retrieve());
+    const fetchCart = () => {
+        commerce.cart.retrieve().then((cart) => {
+            setCart(cart);
+        }).catch((error) => {
+            console.log('There was an error fetching the cart: ', error);
+        })
+        // setCart(await commerce.cart.retrieve());
     }
 
     /**
@@ -35,11 +40,11 @@ const App = () => {
     }
 
     useEffect(() => {
-        fetchCart();
         fetchProducts();
+        fetchCart();
+        console.log(cart);
     }, []);
-
-    console.log(cart);
+    
 
     return (
         <div>

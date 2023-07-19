@@ -3,7 +3,6 @@ import { Container, Typography, Button, Grid } from '@material-ui/core';
 import useStyles from './cartStyles';
 
 const Cart = ({ cart }) => {
-    const isEmpty = !cart.line_items.length;
 
     const EmptyCart = () => (
         <Typography variant='subtitle1'>You have no items in your shopping cart, start adding some!</Typography>
@@ -31,12 +30,14 @@ const Cart = ({ cart }) => {
         </>
     );
 
+    if(!cart.line_items) return "Loading...";
+
     return (
         <div>
             <Container>
                 <div className={classes.toolbar}/>
                 <Typography className={classes.title} variant='h3'>Your Shopping Cart</Typography>
-                { isEmpty ? <EmptyCart /> : <FilledCart /> }
+                { !cart.line_items.length ? <EmptyCart /> : <FilledCart /> }
             </Container>
         </div>
     )
