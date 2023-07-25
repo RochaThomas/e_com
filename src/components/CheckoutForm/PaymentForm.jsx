@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const PaymentForm = () => {
     return (
-        <div>PaymentForm</div>
+        <div>
+            PaymentForm
+        </div>
     )
 }
 
-export default PaymentForm
+export default PaymentForm;
