@@ -22,13 +22,9 @@ const App = () => {
      * getting cart from CommerceJS
      * API CALL
      */
-    const fetchCart = () => {
-        commerce.cart.retrieve().then((cart) => {
-            setCart(cart);
-        }).catch((error) => {
-            console.log('There was an error fetching the cart: ', error);
-        })
-        // setCart(await commerce.cart.retrieve());
+    const fetchCart = async () => {
+        const response = await commerce.cart.retrieve();
+        setCart(response);
     }
 
     /**
@@ -36,16 +32,42 @@ const App = () => {
      * API CALL
      */
     const handleAddToCart = async (productId, quantity) => {
-        const item = await commerce.cart.add(productId, quantity);
-        setCart(item);
+        const response = await commerce.cart.add(productId, quantity);
+        setCart(response);
+    }
+
+    /**
+     * updating quantity of item in cart by pushing to CommerceJS
+     * API CALL
+     */
+    const handleUpdateCartQty = async (productId, quantity) => {
+        const response = await commerce.cart.update(productId, { quantity });
+        setCart(response);
+    }
+
+    /**
+     * delete from cart by calling CommerceJS
+     * API CALL
+     */
+    const handleRemoveFromCart = async (productId) => {
+        const response = await commerce.cart.remove(productId);
+        setCart(response);
+    } 
+
+    /**
+     * delete all from cart by calling CommerceJS
+     * API CALL
+     */
+    const handleEmptyCart = async () => {
+        const response = await commerce.cart.empty();
+        setCart(response);
     }
 
     useEffect(() => {
         fetchProducts();
         fetchCart();
-        console.log(cart);
     }, []);
-    
+    console.log(cart);
 
     return (
         <Router>    
@@ -53,7 +75,14 @@ const App = () => {
                 <Navbar totalItems={cart.total_items} />
                 <Routes>
                     <Route exact path='/' element={<Products products={products} onAddToCart={handleAddToCart}/>}/>
-                    <Route exact path='/cart' element={<Cart cart={cart} />}/>
+                    <Route exact path='/cart' element={
+                        <Cart 
+                            cart={cart} 
+                            handleUpdateCartQty={handleUpdateCartQty}
+                            handleRemoveFromCart={handleRemoveFromCart}
+                            handleEmptyCart={handleEmptyCart}
+                        />
+                    }/>
                 </Routes>
             </div>
         </Router>
