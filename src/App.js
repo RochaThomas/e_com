@@ -83,7 +83,9 @@ const App = () => {
                             handleEmptyCart={handleEmptyCart}
                         />
                     }/>
-                    <Route exact path='/checkout' element={<Checkout products={products} onAddToCart={handleAddToCart}/>}/>
+                    <Route exact path='/checkout' element={
+                        <Checkout cart={cart}/>
+                    }/>
                 </Routes>
             </div>
         </Router>
