@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button, CssBaseline } from '@material-ui/core';
 import useStyles from './checkoutStyles';
 import { commerce } from '../../../lib/commerce';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
 
@@ -13,7 +14,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
     const [checkoutToken, setCheckoutToken] = useState(null);
     const [shippingData, setShippingData] = useState({});
     const classes = useStyles();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
         if (cart.id) {
@@ -23,7 +24,8 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
                     const token = await commerce.checkout.generateToken(cart.id, { type: 'cart' });
                     setCheckoutToken(token);
                 } catch (error) {
-                    if (activeStep !== steps.length) navigate.push('/');
+                    console.log(error);
+                    // navigate('/');
                 }
             }
             generateToken();
