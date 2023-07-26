@@ -16,7 +16,7 @@ const FormInput = ({ name, label }) => {
                         fullWidth
                         label={label}
                         required
-                        error={isError}
+                        // error={isError}
                     />
                 )}
             />
