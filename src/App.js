@@ -64,13 +64,17 @@ const App = () => {
         setCart(response);
     }
 
+    /**
+     * refresh/make a new cart by calling CommerceJS
+     * API CALL
+     */
     const refreshCart = async () => {
         const newCart = await commerce.cart.refresh();
         setCart(newCart);
     }
 
     /**
-     * delete all from cart by calling CommerceJS
+     * capture checkout submission by calling CommerceJS
      * API CALL
      */
     const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
@@ -87,7 +91,6 @@ const App = () => {
         fetchProducts();
         fetchCart();
     }, []);
-    console.log(cart);
 
     return (
         <Router>    
