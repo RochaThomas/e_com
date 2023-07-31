@@ -20,7 +20,6 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         if (cart.id) {
             const generateToken = async () => {
                 try {
-                    console.log('try: ', cart)
                     const token = await commerce.checkout.generateToken(cart.id, { type: 'cart' });
                     setCheckoutToken(token);
                 } catch (error) {
